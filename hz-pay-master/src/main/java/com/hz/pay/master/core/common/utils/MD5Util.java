@@ -176,15 +176,15 @@ public class MD5Util {
         System.out.println(sb);
 
         // 校验sign签名
-        String channel = "channel_7";
+        String channel = "channel_9";
 //        String trade_type = "1005";
-        String trade_type = "90001";
-        String total_amount = "50.00";
+        String trade_type = "100001";
+        String total_amount = "100.00";
         String out_trade_no = "out_trade_no_1";
 //        String out_trade_no = "20200615102453535754";
         String notify_url = "http://www.baidu.com/sb";
 //        String notify_url = "http://ds.di1h.cn/Pay_Gaofang_notifyurl.html";
-        String secretKey = "28b662d883b6d76fd96e4ddc5e9ba780";//渠道1:sdfs1，渠道2:gssa1，渠道3:9b4aa7e25780101eeaec6de8039335ce，渠道5:9b4aa7325360101eeaec6de8039335ce，渠道6:9b4aa7325360101eeaec6de8039335c6，渠道7:28b662d883b6d76fd96e4ddc5e9ba780，渠道8:0f4ddb22ff45c7eb1a1a207d0a2e6f00
+        String secretKey = "94d87e39f14dcc86f0ca5c40fbd458da";//渠道1:sdfs1，渠道2:gssa1，渠道3:9b4aa7e25780101eeaec6de8039335ce，渠道5:9b4aa7325360101eeaec6de8039335ce，渠道6:9b4aa7325360101eeaec6de8039335c6，渠道7:28b662d883b6d76fd96e4ddc5e9ba780，渠道8:0f4ddb22ff45c7eb1a1a207d0a2e6f00，渠道9:94d87e39f14dcc86f0ca5c40fbd458da
         String checkSign = "channel=" + channel + "&" + "trade_type=" + trade_type + "&" + "total_amount=" + total_amount
                 + "&" + "out_trade_no=" + out_trade_no + "&" + "notify_url=" + notify_url + "&" + "key=" + secretKey ;
         checkSign = MD5Util.encryption(checkSign);
@@ -207,6 +207,15 @@ public class MD5Util {
 
         String xunyin = MD5Util.encryption("parter=8142&type=98&value=100&orderid=orderid_1&callbackurl=http%3A%2F%2Fwww.baidu.comdf319a1b237c41db86c510954e3a51ae");
         System.out.println("xunyin:" + xunyin);
+
+        String tb_total_amount = "50";
+        String tb_out_trade_no = "CZ20090123161569855";
+        int tb_trade_status = 1;
+        String tb_key = "cc753d1959e43c87fb8ec036d6eefd54";
+        String tb_sign = "total_amount=" + tb_total_amount + "&" + "out_trade_no=" + tb_out_trade_no + "&" + "trade_status=" + tb_trade_status
+                + "&" + "key=" + tb_key;
+        tb_sign = MD5Util.encryption(tb_sign);
+        System.out.println("tb_sign:" + tb_sign);
 
     }
 

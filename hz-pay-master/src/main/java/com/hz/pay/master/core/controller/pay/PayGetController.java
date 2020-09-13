@@ -226,6 +226,37 @@ public class PayGetController extends BaseController {
                     }
                 }
                 log.info("--------------resData:" + resData);
+            }else if (gewayModel.getContacts().equals("FR")){
+                // 美好
+                Map<String ,Object> sendDataMap = new HashMap<>();
+                sendDataMap.put("money", requestData.total_amount);
+                sendDataMap.put("payType", payCode);
+                sendDataMap.put("outTradeNo", sgid);
+                sendDataMap.put("secretKey", channelModel.getSecretKey());
+                sendDataMap.put("notifyUrl", my_notify_url);
+                sendDataMap.put("returnUrl", requestData.return_url);
+                String parameter = JSON.toJSONString(sendDataMap);
+                parameter = StringUtil.mergeCodeBase64(parameter);
+                Map<String, String> sendMap = new HashMap<>();
+                sendMap.put("jsonData", parameter);
+                String sendData = JSON.toJSONString(sendMap);
+                String fineData = HttpSendUtils.sendPostAppJson(gewayModel.getInterfaceAds(), sendData);
+                Map<String, Object> resMap = new HashMap<>();
+                Map<String, Object> dataMap = new HashMap<>();
+                if (!StringUtils.isBlank(fineData)) {
+                    resMap = JSON.parseObject(fineData, Map.class);
+                    if (resMap.get("resultCode").equals("0")) {
+                        Map<String, Object> mapData = new HashMap<>();
+                        mapData =  JSON.parseObject(resMap.get("data").toString(), Map.class);
+                        String jsonData = StringUtil.decoderBase64(mapData.get("jsonData").toString());
+                        Map<String, Object> orderMap = new HashMap<>();
+                        dataMap = JSON.parseObject(jsonData, Map.class);
+                        orderMap = (Map<String, Object>) dataMap.get("order");
+                        qrCodeUrl = (String) orderMap.get("qrCodeUrl");
+                        resData = "ok";
+                    }
+                }
+                log.info("--------------resData:" + resData);
             }
             if (StringUtils.isBlank(resData)){
                 sendFlag = false;
