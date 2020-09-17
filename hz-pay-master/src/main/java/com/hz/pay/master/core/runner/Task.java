@@ -93,6 +93,11 @@ public class Task {
                         upWorkType.setWorkType(workType);
                         upWorkType.setRunStatus(runStatus);
                         ComponentUtil.taskService.updateWorkType(upWorkType);
+
+
+                        // 判断是否是多人分配利益
+
+
                         if (!deductFlag){
                             // 更新渠道的金额
                             String money = "";

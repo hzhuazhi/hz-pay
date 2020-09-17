@@ -104,6 +104,16 @@ public class DataCoreModel extends BasePage implements Serializable {
     private Integer deductRatio;
 
     /**
+     * 渠道与通道的关联关系的ID：对应表tb_hz_channel_geway的主键ID
+     */
+    private Long channelGewayId;
+
+    /**
+     * 收益类型：1普通收益类型，2多人分配收益类型
+     */
+    private Integer profitType;
+
+    /**
      * 值以work形式填充计算,以后数据多起来则这些字段值填充由worker来跑数据：0初始化，1填充完毕，2无需下发数据
      */
     private Integer workType;
@@ -439,5 +449,21 @@ public class DataCoreModel extends BasePage implements Serializable {
 
     public void setMoneyFitType(Integer moneyFitType) {
         this.moneyFitType = moneyFitType;
+    }
+
+    public Long getChannelGewayId() {
+        return channelGewayId;
+    }
+
+    public void setChannelGewayId(Long channelGewayId) {
+        this.channelGewayId = channelGewayId;
+    }
+
+    public Integer getProfitType() {
+        return profitType;
+    }
+
+    public void setProfitType(Integer profitType) {
+        this.profitType = profitType;
     }
 }

@@ -146,36 +146,46 @@ public class PayGetController extends BaseController {
                 throw new ServiceException("0010", "请填写正确的商家号!");
             }
 
+            // 根据交易类型查询通道
+            GewaytradetypeModel gewaytradetypeQuery = new GewaytradetypeModel();
+            gewaytradetypeQuery.setMyTradeType(requestData.trade_type);
+            GewaytradetypeModel gewaytradetypeModel = (GewaytradetypeModel)ComponentUtil.gewaytradetypeService.findByObject(gewaytradetypeQuery);
+            if (gewaytradetypeModel == null || gewaytradetypeModel.getId() ==  null || gewaytradetypeModel.getId() <= 0){
+                throw new ServiceException("0011", "请填写正确的支付类型!");
+            }
+
+
+            // 查询通道信息
+            GewayModel gewayModel = (GewayModel) ComponentUtil.gewayService.findById(gewaytradetypeModel.getGewayId());
+            if (gewayModel == null || gewayModel.getId() <= 0){
+                throw new ServiceException("0012", "请联系运营人员!");
+            }
+
+            // 根据渠道ID加通道ID查询渠道与通道的关联关系
+            ChannelGewayModel channelGewayModel = new ChannelGewayModel();
+            channelGewayModel.setChannelId(channelModel.getId());
+            channelGewayModel.setGewayId(gewayModel.getId());
+            channelGewayModel = (ChannelGewayModel) ComponentUtil.channelGewayService.findByObject(channelGewayModel);
+            if (channelGewayModel == null || channelGewayModel.getId() <= 0){
+                throw new ServiceException("0013", "请联系运营人员!");
+            }
+
+
             // 校验sign签名
             String checkSign = "channel=" + requestData.channel + "&" + "trade_type=" + requestData.trade_type + "&" + "total_amount=" + requestData.total_amount
                     + "&" + "out_trade_no=" + requestData.out_trade_no + "&" + "notify_url=" + requestData.notify_url + "&" + "key=" + channelModel.getSecretKey();
             checkSign = MD5Util.encryption(checkSign);
             if (!requestData.sign.equals(checkSign)){
-                throw new ServiceException("0011", "签名错误!");
+                throw new ServiceException("0014", "签名错误!");
             }
 
-            // 查询关联关系
-            ChannelGewayModel channelGewayModel = new ChannelGewayModel();
-            channelGewayModel.setChannelId(channelModel.getId());
-            channelGewayModel = (ChannelGewayModel) ComponentUtil.channelGewayService.findByObject(channelGewayModel);
-            if (channelGewayModel == null || channelGewayModel.getId() <= 0){
-                throw new ServiceException("0012", "请联系运营人员!");
-            }
-            // 查询通道信息
-            GewayModel gewayModel = (GewayModel) ComponentUtil.gewayService.findById(channelGewayModel.getGewayId());
-            if (gewayModel == null || gewayModel.getId() <= 0){
-                throw new ServiceException("0013", "请联系运营人员!");
-            }
+
+
             boolean sendFlag = false;// 请求结果：false表示请求失败，true表示请求成功
 
             // 计算手续费
             String serviceCharge = "";
             // 使用上游手续费
-            GewaytradetypeModel gewaytradetypeQuery = HodgepodgeMethod.assembleGewaytradetypeQuery(requestData.trade_type);
-            GewaytradetypeModel gewaytradetypeModel = (GewaytradetypeModel) ComponentUtil.gewaytradetypeService.findByObject(gewaytradetypeQuery);
-            if (gewaytradetypeModel == null){
-                throw new ServiceException("0014", "请联系运营人员!");
-            }
 //            Map<String, String> map = HodgepodgeMethod.getPayCode(requestData.trade_type);
             String payCode = gewaytradetypeModel.getOutTradeType();
             if(!StringUtils.isBlank(channelGewayModel.getServiceCharge())){
@@ -267,7 +277,7 @@ public class PayGetController extends BaseController {
                     sendFlag = true;
                 }
             }
-            ChannelDataModel channelDataModel = HodgepodgeMethod.assembleChannelData(requestData, sgid, channelModel.getId(), gewayModel.getId(), nowTime, my_notify_url, serviceCharge, sendFlag);
+            ChannelDataModel channelDataModel = HodgepodgeMethod.assembleChannelData(requestData, sgid, channelModel.getId(), gewayModel.getId(), channelGewayModel.getId(), channelGewayModel.getProfitType(), nowTime, my_notify_url, serviceCharge, sendFlag);
             ComponentUtil.channelDataService.add(channelDataModel);
             if (!StringUtils.isBlank(qrCodeUrl)){
 //                qrCodeUrl = "http://www.baidu.com";

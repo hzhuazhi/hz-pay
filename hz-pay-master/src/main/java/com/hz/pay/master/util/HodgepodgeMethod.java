@@ -244,6 +244,8 @@ public class HodgepodgeMethod {
      * @param myTradeNo - 我方订单号
      * @param channelId - 渠道主键ID
      * @param gewayId - 通道主键ID
+     * @param channelGewayId - 渠道与通道的关联关系的ID：对应表tb_hz_channel_geway的主键ID
+     * @param profitType - 收益类型：1普通收益类型，2多人分配收益类型
      * @param nowTime - 现在时间
      * @param serviceCharge - 手续费
      * @param sendFlag - false表示请求失败，true表示请求成功
@@ -251,12 +253,15 @@ public class HodgepodgeMethod {
      * @author yoko
      * @date 2020/3/24 21:41
      */
-    public static ChannelDataModel assembleChannelData(RequestPay requestData, String myTradeNo, long channelId, long gewayId, String nowTime, String my_notify_url, String serviceCharge, boolean sendFlag){
+    public static ChannelDataModel assembleChannelData(RequestPay requestData, String myTradeNo, long channelId, long gewayId,
+                                                       long channelGewayId, int profitType, String nowTime, String my_notify_url, String serviceCharge, boolean sendFlag){
         ChannelDataModel resBean = new ChannelDataModel();
         resBean.setMyTradeNo(myTradeNo);
         resBean.setChannelId(channelId);
         resBean.setGewayId(gewayId);
         resBean.setChannel(requestData.channel);
+        resBean.setChannelGewayId(channelGewayId);
+        resBean.setProfitType(profitType);
         resBean.setTradeType(requestData.trade_type);
         resBean.setTotalAmount(requestData.total_amount);
         resBean.setServiceCharge(serviceCharge);
@@ -887,7 +892,7 @@ public class HodgepodgeMethod {
      */
     public static DataCoreModel assembleDataCoreFine(RequestFine requestModel, ChannelDataModel channelDataModel, ChannelGewayModel channelGewayModel,
                                                      String total_amount, String serviceCharge, String actualMoney, int tradeStatus, String payAmount,
-                                                     String payActualMoney, int moneyFitType) throws Exception{
+                                                     String payActualMoney, int moneyFitType, long channelGewayId, int profitType) throws Exception{
         DataCoreModel resBean = new DataCoreModel();
         resBean.setMyTradeNo(requestModel.out_trade_no);
         resBean.setTradeNo(requestModel.trade_no);
@@ -913,6 +918,10 @@ public class HodgepodgeMethod {
             resBean.setXyExtraReturnParam(channelDataModel.getExtraReturnParam());
         }
         resBean.setDeductRatio(channelGewayModel.getDeductRatio());
+
+        resBean.setChannelGewayId(channelGewayId);
+        resBean.setProfitType(profitType);
+
         resBean.setMoneyFitType(moneyFitType);
         resBean.setCurday(DateUtil.getDayNumber(new Date()));
         resBean.setCurhour(DateUtil.getHour(new Date()));

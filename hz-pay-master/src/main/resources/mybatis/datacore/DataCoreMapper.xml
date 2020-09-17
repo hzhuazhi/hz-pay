@@ -10,7 +10,7 @@
         a.id,a.my_trade_no,a.trade_no,a.out_trade_no,a.total_amount,a.service_charge,a.actual_money,
         a.pay_amount,a.pay_actual_money,a.trade_status,a.extra_return_param,a.trade_time,
         a.`sign`,a.channel_id,a.geway_id,a.notify_url,a.notify_suc,a.xy_extra_return_param,a.deduct_ratio,
-        a.replenish_type,a.money_fit_type,a.work_type,
+        a.channel_geway_id,a.profit_type,a.replenish_type,a.money_fit_type,a.work_type,
         a.curday,a.curhour,a.curminute,a.run_num,a.run_status,
         a.create_time,a.update_time,a.yn
     </sql>
@@ -184,6 +184,12 @@
             <if test="deductRatio != null and deductRatio != '' " >
                 deduct_ratio,
             </if>
+            <if test="channelGewayId != null and channelGewayId != '' " >
+                channel_geway_id,
+            </if>
+            <if test="profitType != null and profitType != '' " >
+                profit_type,
+            </if>
             <if test="replenishType != null and replenishType != '' " >
                 replenish_type,
             </if>
@@ -265,6 +271,12 @@
             </if>
             <if test="deductRatio != null and deductRatio != '' " >
                 <![CDATA[  #{deductRatio}, ]]>
+            </if>
+            <if test="channelGewayId != null and channelGewayId != '' " >
+                <![CDATA[  #{channelGewayId}, ]]>
+            </if>
+            <if test="profitType != null and profitType != '' " >
+                <![CDATA[  #{profitType}, ]]>
             </if>
             <if test="replenishType != null and replenishType != '' " >
                 <![CDATA[  #{replenishType}, ]]>

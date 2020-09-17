@@ -118,6 +118,16 @@ public class ChannelDataModel extends BasePage implements Serializable {
     private String productCode;
 
     /**
+     * 渠道与通道的关联关系的ID：对应表tb_hz_channel_geway的主键ID
+     */
+    private Long channelGewayId;
+
+    /**
+     * 收益类型：1普通收益类型，2多人分配收益类型
+     */
+    private Integer profitType;
+
+    /**
      * 请求是否成功：1成功，2失败
      */
     private Integer sendOk;
@@ -426,5 +436,21 @@ public class ChannelDataModel extends BasePage implements Serializable {
 
     public void setActualMoney(String actualMoney) {
         this.actualMoney = actualMoney;
+    }
+
+    public Long getChannelGewayId() {
+        return channelGewayId;
+    }
+
+    public void setChannelGewayId(Long channelGewayId) {
+        this.channelGewayId = channelGewayId;
+    }
+
+    public Integer getProfitType() {
+        return profitType;
+    }
+
+    public void setProfitType(Integer profitType) {
+        this.profitType = profitType;
     }
 }

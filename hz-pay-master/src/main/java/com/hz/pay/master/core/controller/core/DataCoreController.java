@@ -833,7 +833,7 @@ public class DataCoreController extends BaseController {
             ComponentUtil.receivingAccountDataService.update(receivingAccountDataModel);
             //组装上游数据
             DataCoreModel dataCoreModel = HodgepodgeMethod.assembleDataCoreFine(requestModel, channelDataModel, channelGewayModel, total_amount, serviceCharge, actualMoney, tradeStatus,
-                    pay_amount, payActualMoney, moneyFitType);
+                    pay_amount, payActualMoney, moneyFitType, channelDataModel.getChannelGewayId(), channelDataModel.getProfitType());
             int num = ComponentUtil.dataCoreService.add(dataCoreModel);
             if (num > 0){
                 return "ok";

@@ -44,6 +44,12 @@ public class ChannelGewayModel extends BasePage implements Serializable {
     private Integer deductRatio;
 
     /**
+     * 收益类型：1普通收益类型，2多人分配收益类型
+     */
+    private Integer profitType;
+
+
+    /**
      * 创建时间
      */
     private String createTime;
@@ -128,5 +134,13 @@ public class ChannelGewayModel extends BasePage implements Serializable {
 
     public void setDeductRatio(Integer deductRatio) {
         this.deductRatio = deductRatio;
+    }
+
+    public Integer getProfitType() {
+        return profitType;
+    }
+
+    public void setProfitType(Integer profitType) {
+        this.profitType = profitType;
     }
 }

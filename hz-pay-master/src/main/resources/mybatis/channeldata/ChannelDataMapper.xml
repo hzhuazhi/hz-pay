@@ -8,7 +8,7 @@
     <!-- 定义数据库基本列,只适用代替单表的*-->
     <sql id="Base_Column_List">
         a.id,a.my_trade_no,a.channel_id,a.geway_id,a.channel,a.trade_type,a.total_amount,a.service_charge,a.actual_money,a.out_trade_no,a.notify_url,a.my_notify_url,
-        a.interface_ver,a.return_url,a.extra_return_param,a.client_ip,a.`sign`,a.`sub_time`,a.product_name,a.product_code,a.send_ok,
+        a.interface_ver,a.return_url,a.extra_return_param,a.client_ip,a.`sign`,a.`sub_time`,a.product_name,a.product_code,a.channel_geway_id,a.profit_type,a.send_ok,
         a.curday,a.curhour,a.curminute,a.run_num,a.run_status,
         a.create_time,a.update_time,a.yn
     </sql>
@@ -185,6 +185,12 @@
             <if test="productCode != null and productCode != '' " >
                 product_code,
             </if>
+            <if test="channelGewayId != null and channelGewayId != '' " >
+                channel_geway_id,
+            </if>
+            <if test="profitType != null and profitType != '' " >
+                profit_type,
+            </if>
             <if test="sendOk != null and sendOk != '' " >
                 send_ok,
             </if>
@@ -263,6 +269,12 @@
             </if>
             <if test="productCode != null and productCode != '' " >
                 <![CDATA[  #{productCode}, ]]>
+            </if>
+            <if test="channelGewayId != null and channelGewayId != '' " >
+                <![CDATA[  #{channelGewayId}, ]]>
+            </if>
+            <if test="profitType != null and profitType != '' " >
+                <![CDATA[  #{profitType}, ]]>
             </if>
             <if test="sendOk != null and sendOk != '' " >
                 <![CDATA[  #{sendOk}, ]]>
