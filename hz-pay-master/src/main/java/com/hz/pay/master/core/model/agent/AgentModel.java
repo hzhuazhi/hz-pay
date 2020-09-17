@@ -3,6 +3,7 @@ package com.hz.pay.master.core.model.agent;
 import com.hz.pay.master.core.protocol.page.BasePage;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @Description 代理的实体属性Bean
@@ -69,6 +70,11 @@ public class AgentModel extends BasePage implements Serializable {
      * 是否有效：0有效，1无效/删除
      */
     private Integer yn;
+
+    /**
+     * 金额
+     */
+    private BigDecimal money;
 
 
     public Long getId() {
@@ -165,5 +171,13 @@ public class AgentModel extends BasePage implements Serializable {
 
     public void setYn(Integer yn) {
         this.yn = yn;
+    }
+
+    public BigDecimal getMoney() {
+        return money;
+    }
+
+    public void setMoney(BigDecimal money) {
+        this.money = money;
     }
 }

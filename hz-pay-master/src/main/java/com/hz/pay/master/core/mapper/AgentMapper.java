@@ -1,6 +1,7 @@
 package com.hz.pay.master.core.mapper;
 
 import com.hz.pay.master.core.common.dao.BaseDao;
+import com.hz.pay.master.core.model.agent.AgentModel;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,4 +12,13 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AgentMapper<T> extends BaseDao<T> {
+
+    /**
+     * @Description: 更新金额
+     * @param model
+     * @return
+     * @author yoko
+     * @date 2020/9/17 22:28
+    */
+    public int updateMoney(AgentModel model);
 }

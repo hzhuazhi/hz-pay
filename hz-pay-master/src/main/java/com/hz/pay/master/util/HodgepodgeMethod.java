@@ -5,6 +5,7 @@ import com.hz.pay.master.core.common.utils.BeanUtils;
 import com.hz.pay.master.core.common.utils.DateUtil;
 import com.hz.pay.master.core.common.utils.StringUtil;
 import com.hz.pay.master.core.common.utils.constant.ServerConstant;
+import com.hz.pay.master.core.model.agent.AgentModel;
 import com.hz.pay.master.core.model.alipay.AlipayH5Model;
 import com.hz.pay.master.core.model.alipay.AlipayModel;
 import com.hz.pay.master.core.model.alipay.AlipayNotifyModel;
@@ -27,6 +28,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -928,6 +930,22 @@ public class HodgepodgeMethod {
         resBean.setCurminute(DateUtil.getCurminute(new Date()));
         return resBean;
 
+    }
+
+    /**
+     * @Description: 组装更新代理的金额
+     * @param id
+     * @param money
+     * @return com.hz.pay.master.core.model.agent.AgentModel
+     * @author yoko
+     * @date 2020/9/17 22:38
+     */
+    public static AgentModel assembleAgentUpdate(long id, String money){
+        AgentModel resBean = new AgentModel();
+        resBean.setId(id);
+        BigDecimal bd = new BigDecimal(money);
+        resBean.setMoney(bd);
+        return resBean;
     }
 
 

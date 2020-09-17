@@ -2,6 +2,7 @@ package com.hz.pay.master.util;
 
 import com.hz.pay.master.core.common.utils.constant.ServerConstant;
 import com.hz.pay.master.core.model.task.base.StatusModel;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,21 @@ import org.slf4j.LoggerFactory;
 public class TaskMethod {
     private static Logger log = LoggerFactory.getLogger(TaskMethod.class);
 
+
+    /**
+     * @Description: 组装查询提现的查询条件
+     * @param limitNum - 多少条数据
+     * @return
+     * @author yoko
+     * @date 2020/1/11 16:23
+     */
+    public static StatusModel assembleStatusQuery(int limitNum){
+        StatusModel resBean = new StatusModel();
+        resBean.setLimitNum(limitNum);
+        resBean.setRunNum(ServerConstant.PUBLIC_CONSTANT.RUN_NUM_FIVE);
+        resBean.setRunStatus(ServerConstant.PUBLIC_CONSTANT.RUN_STATUS_THREE);
+        return resBean;
+    }
 
     /**
      * @Description: 组装查询定数据填充的查询条件

@@ -30,6 +30,7 @@ public class ComponentUtil {
     public static AgentService agentService;
     public static AgentChannelGewayService agentChannelGewayService;
     public static AgentProfitService agentProfitService;
+    public static TaskAgentProfitService taskAgentProfitService;
 
 
 }

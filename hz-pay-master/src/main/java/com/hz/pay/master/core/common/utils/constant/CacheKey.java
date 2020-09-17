@@ -38,4 +38,9 @@ public interface CacheKey {
      */
     String LOCK_TASK_WORK_TYPE_AGENT = "-6";
 
+    /**
+     * task跑代理收益，锁住这条任务流水
+     */
+    String LOCK_AGENT_PROFIT = "-7";
+
 }

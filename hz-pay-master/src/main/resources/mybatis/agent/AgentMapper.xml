@@ -180,5 +180,21 @@
         <include refid="Example_Where_Clause_id"/>
     </update>
 
+    <!-- 更新余额 -->
+    <update id="updateMoney" parameterType="Object">
+        UPDATE tb_hz_agent a
+        <trim prefix="set" suffixOverrides=",">
+            <if test="money != null and money != '' " >
+                a.total_money = a.total_money + #{money},
+            </if>
+            <if test="money != null and money != '' " >
+                a.balance = a.balance + #{money},
+            </if>
+            a.update_time = NOW(),
+        </trim>
+        where 1=1
+        and a.id = #{id}
+    </update>
+
 
 </mapper>

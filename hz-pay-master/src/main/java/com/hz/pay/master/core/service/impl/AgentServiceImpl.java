@@ -3,6 +3,7 @@ package com.hz.pay.master.core.service.impl;
 import com.hz.pay.master.core.common.dao.BaseDao;
 import com.hz.pay.master.core.common.service.impl.BaseServiceImpl;
 import com.hz.pay.master.core.mapper.AgentMapper;
+import com.hz.pay.master.core.model.agent.AgentModel;
 import com.hz.pay.master.core.service.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,10 @@ public class AgentServiceImpl<T> extends BaseServiceImpl<T> implements AgentServ
 
     public BaseDao<T> getDao() {
         return agentMapper;
+    }
+
+    @Override
+    public int updateMoney(AgentModel model) {
+        return agentMapper.updateMoney(model);
     }
 }
