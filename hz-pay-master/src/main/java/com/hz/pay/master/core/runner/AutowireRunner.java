@@ -83,7 +83,13 @@ public class AutowireRunner implements ApplicationRunner {
     private ReceivingAccountDataService receivingAccountDataService;
 
     @Autowired
-    public AgentService agentService;
+    private AgentService agentService;
+
+    @Autowired
+    private AgentChannelGewayService agentChannelGewayService;
+
+    @Autowired
+    private AgentProfitService agentProfitService;
 
 
 
@@ -115,6 +121,8 @@ public class AutowireRunner implements ApplicationRunner {
         ComponentUtil.receivingAccountService = receivingAccountService;
         ComponentUtil.receivingAccountDataService = receivingAccountDataService;
         ComponentUtil.agentService = agentService;
+        ComponentUtil.agentChannelGewayService = agentChannelGewayService;
+        ComponentUtil.agentProfitService = agentProfitService;
 
         runThread = new RunThread();
         runThread.start();

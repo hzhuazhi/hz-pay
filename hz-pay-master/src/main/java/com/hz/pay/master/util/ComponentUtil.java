@@ -28,6 +28,8 @@ public class ComponentUtil {
     public static ReceivingAccountService receivingAccountService;
     public static ReceivingAccountDataService receivingAccountDataService;
     public static AgentService agentService;
+    public static AgentChannelGewayService agentChannelGewayService;
+    public static AgentProfitService agentProfitService;
 
 
 }

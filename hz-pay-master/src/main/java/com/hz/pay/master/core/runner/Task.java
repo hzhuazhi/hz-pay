@@ -1,12 +1,15 @@
 package com.hz.pay.master.core.runner;
 
+import com.hz.pay.master.core.common.utils.BeanUtils;
 import com.hz.pay.master.core.common.utils.HttpSendUtils;
 import com.hz.pay.master.core.common.utils.MD5Util;
 import com.hz.pay.master.core.common.utils.StringUtil;
 import com.hz.pay.master.core.common.utils.constant.CacheKey;
 import com.hz.pay.master.core.common.utils.constant.CachedKeyUtils;
 import com.hz.pay.master.core.common.utils.constant.ServerConstant;
+import com.hz.pay.master.core.model.agent.AgentChannelGewayModel;
 import com.hz.pay.master.core.model.agent.AgentModel;
+import com.hz.pay.master.core.model.agent.AgentProfitModel;
 import com.hz.pay.master.core.model.channel.ChannelModel;
 import com.hz.pay.master.core.model.datacore.DataCoreModel;
 import com.hz.pay.master.core.model.task.base.StatusModel;
@@ -96,6 +99,24 @@ public class Task {
 
 
                         // 判断是否是多人分配利益
+                        if (data.getProfitType() == 2){
+                            AgentChannelGewayModel agentChannelGewayModel = new AgentChannelGewayModel();
+                            agentChannelGewayModel.setChannelGewayId(data.getChannelGewayId());
+                            List<AgentChannelGewayModel> agentChannelGewayList = ComponentUtil.agentChannelGewayService.findByCondition(agentChannelGewayModel);
+                            if (agentChannelGewayList != null && agentChannelGewayList.size() > 0){
+                                for (AgentChannelGewayModel ag_data : agentChannelGewayList){
+                                    String profit = StringUtil.getMultiply(data.getServiceCharge(), ag_data.getServiceCharge());
+                                    AgentProfitModel agentProfitModel = BeanUtils.copy(data, AgentProfitModel.class);
+                                    agentProfitModel.setId(null);
+                                    agentProfitModel.setAgentId(ag_data.getAgentId());
+                                    agentProfitModel.setProfitRatio(ag_data.getServiceCharge());
+                                    agentProfitModel.setProfit(profit);
+                                    agentProfitModel.setRunNum(null);
+                                    agentProfitModel.setRunStatus(null);
+                                    ComponentUtil.agentProfitService.add(agentProfitModel);
+                                }
+                            }
+                        }
 
 
                         if (!deductFlag){
