@@ -2,6 +2,8 @@ package com.hz.pay.master.core.runner;
 
 import com.hz.pay.master.core.common.redis.RedisIdService;
 import com.hz.pay.master.core.common.redis.RedisService;
+import com.hz.pay.master.core.common.utils.constant.CacheKey;
+import com.hz.pay.master.core.common.utils.constant.CachedKeyUtils;
 import com.hz.pay.master.core.common.utils.constant.LoadConstant;
 import com.hz.pay.master.core.service.*;
 import com.hz.pay.master.util.ComponentUtil;
@@ -149,6 +151,14 @@ public class AutowireRunner implements ApplicationRunner {
         @Override
         public void run() {
             log.info("启动啦............");
+//            while (true){
+//                String lockKey = CachedKeyUtils.getCacheKey(CacheKey.LOCK_TASK_WORK_TYPE_CHANNEL, 1);
+//                boolean flagLock = ComponentUtil.redisIdService.lock(lockKey);
+//                log.info("flagLock：" + flagLock);
+//                if (flagLock){
+//                    break;
+//                }
+//            }
         }
     }
 

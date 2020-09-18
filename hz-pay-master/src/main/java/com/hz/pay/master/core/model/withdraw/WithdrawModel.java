@@ -32,6 +32,11 @@ public class WithdrawModel extends BasePage implements Serializable {
     private String money;
 
     /**
+     * 手续费
+     */
+    private String serviceCharge;
+
+    /**
      * 绑定银行卡的主键ID
      */
     private Long bankId;
@@ -210,5 +215,13 @@ public class WithdrawModel extends BasePage implements Serializable {
 
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
+    }
+
+    public String getServiceCharge() {
+        return serviceCharge;
+    }
+
+    public void setServiceCharge(String serviceCharge) {
+        this.serviceCharge = serviceCharge;
     }
 }

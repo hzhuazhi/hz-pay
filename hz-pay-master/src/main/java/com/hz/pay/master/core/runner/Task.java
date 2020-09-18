@@ -263,9 +263,10 @@ public class Task {
                             if (flag_money){
                                 // 余额足够进行提现
                                 // 更新渠道的金额
+                                String totalMoney = StringUtil.getBigDecimalAdd(data.getMoney(), data.getServiceCharge());
                                 StatusModel chMoney = new StatusModel();
                                 chMoney.setId(data.getLinkId());
-                                chMoney.setMoney(data.getMoney());
+                                chMoney.setMoney(totalMoney);
                                 ComponentUtil.taskService.updateChannelReduceMoney(chMoney);
                                 // 组装更改运行状态的数据：更新成成功
                                 StatusModel statusModel = TaskMethod.assembleUpdateStatusModel(data.getId(), ServerConstant.PUBLIC_CONSTANT.SIZE_VALUE_THREE);
@@ -284,9 +285,10 @@ public class Task {
                             if (flag_money){
                                 // 余额足够进行提现
                                 // 更新代理的金额
+                                String totalMoney = StringUtil.getBigDecimalAdd(data.getMoney(), data.getServiceCharge());
                                 StatusModel agMoney = new StatusModel();
                                 agMoney.setId(data.getLinkId());
-                                agMoney.setMoney(data.getMoney());
+                                agMoney.setMoney(totalMoney);
                                 ComponentUtil.taskService.updateAgentReduceMoney(agMoney);
                                 // 组装更改运行状态的数据：更新成成功
                                 StatusModel statusModel = TaskMethod.assembleUpdateStatusModel(data.getId(), ServerConstant.PUBLIC_CONSTANT.SIZE_VALUE_THREE);

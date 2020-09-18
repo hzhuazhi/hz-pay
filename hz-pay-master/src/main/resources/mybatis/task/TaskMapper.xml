@@ -15,7 +15,7 @@
 
 
     <sql id="Base_Column_List_Withdraw">
-        a.id,a.link_id,a.money,a.bank_id,a.withdraw_status,a.withdraw_explain,a.role_id,a.remark,a.run_num,a.run_status,
+        a.id,a.link_id,a.money,a.service_charge,a.bank_id,a.withdraw_status,a.withdraw_explain,a.role_id,a.remark,a.run_num,a.run_status,
         a.create_time,a.update_time,a.yn
     </sql>
 
