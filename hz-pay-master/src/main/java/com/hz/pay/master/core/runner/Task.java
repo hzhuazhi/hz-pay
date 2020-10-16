@@ -192,7 +192,7 @@ public class Task {
                         String sendUrl = dataModel.getNotifyUrl();// 需要发送给下游的接口
                         String sendData = "?total_amount=" + dataModel.getTotalAmount() + "&" + "pay_amount=" + dataModel.getPayAmount() + "&" + "out_trade_no=" + dataModel.getOutTradeNo() + "&" + "trade_status=" + dataModel.getTradeStatus()
                                 + "&" + "trade_no=" + dataModel.getMyTradeNo() + "&" + "extra_return_param=" + dataModel.getXyExtraReturnParam() + "&" + "sign=" + sign
-                                + "&" + "trade_time=" + dataModel.getTradeTime();
+                                + "&" + "trade_time=" + System.currentTimeMillis();
 //                        String resp = HttpSendUtils.sendGet(sendUrl + URLEncoder.encode(sendData,"UTF-8"), null, null);
                         String resp = HttpSendUtils.sendGet(sendUrl + sendData, null, null);
                         if (resp.equals(notify_suc)){
