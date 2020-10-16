@@ -105,7 +105,8 @@ public class Task {
                             List<AgentChannelGewayModel> agentChannelGewayList = ComponentUtil.agentChannelGewayService.findByCondition(agentChannelGewayModel);
                             if (agentChannelGewayList != null && agentChannelGewayList.size() > 0){
                                 for (AgentChannelGewayModel ag_data : agentChannelGewayList){
-                                    String profit = StringUtil.getMultiply(data.getServiceCharge(), ag_data.getServiceCharge());
+//                                    String profit = StringUtil.getMultiply(data.getServiceCharge(), ag_data.getServiceCharge());
+                                    String profit = StringUtil.getMultiply(data.getPayAmount(), ag_data.getServiceCharge());
                                     AgentProfitModel agentProfitModel = BeanUtils.copy(data, AgentProfitModel.class);
                                     agentProfitModel.setId(null);
                                     agentProfitModel.setAgentId(ag_data.getAgentId());
